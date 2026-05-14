@@ -1,0 +1,42 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageName: 'springboot-azure-cicd'
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildApp
+    displayName: 'Build Spring Boot Application'
+    steps:
+    
+    # Build Spring Boot JAR with JDK 21
+    - task: Maven@3
+      displayName: 'Build with Maven'
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'clean package'
+        options: '-DskipTests'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.21'
+        mavenVersionOption: 'Default'
+    
+    # Build Docker Image
+    - task: Docker@2
+      displayName: 'Build Docker Image'
+      inputs:
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
+    
+    # List built artifacts (for verification)
+    - script: |
+        echo "Build completed successfully!"
+        ls -la target/
+      displayName: 'Show Build Output'
