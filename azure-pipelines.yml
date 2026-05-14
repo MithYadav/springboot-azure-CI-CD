@@ -57,7 +57,7 @@ stages:
   jobs:
   - deployment: DeployToAzure
     displayName: 'Deploy Container to Azure'
-    environment: 'production'
+    environment: 'development'
     strategy:
       runOnce:
         deploy:
