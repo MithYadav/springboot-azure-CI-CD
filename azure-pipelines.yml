@@ -3,8 +3,8 @@ trigger:
   - master
 
 pool:
-  name: 'Default'  # Use self-hosted agent
-  # vmImage: 'ubuntu-latest'  # Uncomment this after Microsoft approves parallelism
+  # name: 'Default'  # Use self-hosted agent
+  vmImage: 'ubuntu-latest'  # Uncomment this after Microsoft approves parallelism
 
 variables:
   dockerHubUsername: 'learndocker0118'  # CHANGE THIS to your Docker Hub username
