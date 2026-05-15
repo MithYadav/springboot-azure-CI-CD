@@ -12,7 +12,7 @@ public class TestCICDController {
 	@GetMapping
 	public ResponseEntity<String> test() {
 
-		return ResponseEntity.ok("CI/CD test is success");
+		return ResponseEntity.ok("spring app is deployed on azure using azuredevops successfully!");
 	}
 
 }
